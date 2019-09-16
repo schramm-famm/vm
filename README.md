@@ -16,8 +16,8 @@ for your OS. VirtualBox runs the VMs that Vagrant builds.
 ## Set-Up Instructions (Non-Windows Machines Only)
 1. Change directory into the VM folder.
 2. Set the environment variable `SYSC4907` to the folder where you will be doing 
-all of your SYSC4907 developing. Example: `export SYSC4907=/Users/Thao/Documents
-/SYSC4907`.
+all of your SYSC4907 developing. Example: 
+`export SYSC4907=/Users/Thao/Documents/SYSC4907`.
 3. Run `vagrant up --provision-with rootlogin,bootstrap` to start up the VM and 
 provision it.
 	* After this line, the VM is running and you can actually ssh into it 
