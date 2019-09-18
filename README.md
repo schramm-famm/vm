@@ -5,20 +5,23 @@ packages that come with the hashicorp/bionic64 box.
 
 ## Downloads
 ### Vagrant
-Download it from [here](https://www.vagrantup.com/downloads.html) for your OS.
-Vagrant is a tool for building and managing virtual machine environments. It
-will be useful to maintain a consistent development environment that is
-has the same configuration as the production environment.
+Download the latest version [here](https://www.vagrantup.com/downloads.html) for
+your OS. Vagrant is a tool for building and managing virtual machine
+environments. It will be useful to maintain a consistent development environment
+that is has the same configuration as the production environment.
 ### VirtualBox
-Download the newest version from [here](https://www.virtualbox.org/wiki/Downloads) 
+Download the latest version [here](https://www.virtualbox.org/wiki/Downloads) 
 for your OS. VirtualBox runs the VMs that Vagrant builds.
+### Git for Windows (Windows users only)
+Download the latest version [here](https://gitforwindows.org/). This provides
+a bash shell and ssh for Windows. For the set-up instructions, run this terminal
+before following the instructions.
 
-## Set-Up Instructions (Non-Windows Machines Only)
+## Set-Up Instructions
 1. Change directory into the VM folder.
 2. Set the environment variable `SYSC4907` to the folder where you will be doing
-all of your SYSC4907 developing. Example: run
-`export SYSC4907=/Users/Thao/Documents/SYSC4907` or add that command to your .bashrc
-and run `source ~/.bashrc`.
+all of your SYSC4907 developing. Run `export SYSC4907=/Users/Thao/Documents/SYSC4907`
+or add that command to your .bashrc and run `source ~/.bashrc`.
 3. Run `vagrant up --provision-with rootlogin,bootstrap` to start up the VM and
 provision it.
 	* After this line, the VM is running and you can actually ssh into it
