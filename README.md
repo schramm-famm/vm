@@ -18,7 +18,7 @@ a bash shell and ssh for Windows. For the set-up instructions, run this terminal
 before following the instructions.
 
 ## Set-Up Instructions
-1. Change directory into the VM folder.
+1. Clone this repo onto your system and change directories into it.
 2. Set the environment variable `SYSC4907` to the folder where you will be doing
 all of your SYSC4907 developing. Run `export SYSC4907=/Users/Thao/Documents/SYSC4907`
 or add that command to your .bashrc and run `source ~/.bashrc`.
