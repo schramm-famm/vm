@@ -25,14 +25,13 @@ or add that command to your .bashrc and run `source ~/.bashrc`.
 3. Run `vagrant up --provision-with rootlogin,bootstrap` to start up the VM and
 provision it.
 	* After this line, the VM is running and you can actually ssh into it
-manually with `ssh -o IdentitiesOnly=yes -p 2222 root@localhost` and the password
+manually with `ssh -o IdentitiesOnly=yes root@192.168.69.69` and the password
 is `vagrant`
 	* The next lines are to set-up shortcuts and SSH keys.
 4. Add this to the end of `~/.ssh/config`:
 ```
 Host schramm-famm
-  Hostname localhost
-  Port 2222
+  Hostname 192.168.69.69
   User root
   IdentitesOnly yes
 ```

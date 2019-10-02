@@ -14,4 +14,5 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vm"
   config.vm.synced_folder ENV['SYSC4907'], "/schramm-famm"
   config.vm.hostname = "schramm-famm"
+  config.vm.network "private_network", ip: "192.168.69.69"
 end
