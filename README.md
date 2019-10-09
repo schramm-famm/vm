@@ -33,7 +33,7 @@ is `vagrant`
 Host schramm-famm
   Hostname 192.168.69.69
   User root
-  IdentitesOnly yes
+  IdentitiesOnly yes
 ```
 5. If you already have a SSH key generated, you can skip this step. Use `ssh-keygen`
 to generate a new SSH key. When you run the command, just press Enter for every prompt.
