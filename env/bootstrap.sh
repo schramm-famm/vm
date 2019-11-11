@@ -9,6 +9,7 @@ sudo apt-get -qy install \
     curl \
     gnupg-agent \
     software-properties-common \
+    unzip \
     vim > /dev/null
 echo "### Adding Docker GPG key..."
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - > /dev/null
@@ -26,6 +27,9 @@ sudo snap install microk8s --classic > /dev/null
 echo "### Installing Go..."
 sudo wget -q https://dl.google.com/go/go1.13.linux-amd64.tar.gz
 sudo tar -xvf go1.13.linux-amd64.tar.gz > /dev/null
+echo "### Installing Terraform..."
+sudo wget -q https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip
+sudo unzip terraform_0.12.13_linux_amd64.zip -d /usr/bin > /dev/null
 if [ -d "/usr/local/go" ]; then
 	rm -rf /usr/local/go
 fi
