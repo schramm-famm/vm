@@ -5,6 +5,7 @@ echo "### Installing dependencies..."
 sudo apt-get -qy install \
     apt-transport-https \
     ca-certificates \
+    mysql-server \
     curl \
     gnupg-agent \
     software-properties-common \
@@ -20,6 +21,8 @@ echo "### Updating source list..."
 sudo apt-get -yq update > /dev/null
 echo "### Installing Docker..."
 sudo apt-get -yq install docker-ce docker-ce-cli containerd.io > /dev/null
+echo "### Installing Kubernetes..."
+sudo snap install microk8s --classic > /dev/null
 echo "### Installing Go..."
 sudo wget -q https://dl.google.com/go/go1.13.linux-amd64.tar.gz
 sudo tar -xvf go1.13.linux-amd64.tar.gz > /dev/null
