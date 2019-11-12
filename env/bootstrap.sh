@@ -4,10 +4,11 @@ sudo apt-get -qy update > /dev/null
 echo "### Installing dependencies..."
 sudo apt-get -qy install \
     apt-transport-https \
+    build-essential \
     ca-certificates \
-    mysql-server \
     curl \
     gnupg-agent \
+    mysql-server \
     software-properties-common \
     unzip \
     vim > /dev/null
