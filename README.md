@@ -45,3 +45,7 @@ After the set-up instructions are successfully completed, you can run
 these instructions, you don't have to run them again. You can run `vagrant
 suspend` within the vm folder to pause your VM and `vagrant up` to start it up
 again.
+
+## Updating VM
+To safely apply changes that have been made to the VM provisioning process, run
+`vagrant halt` and then `vagrant up --provision`.
