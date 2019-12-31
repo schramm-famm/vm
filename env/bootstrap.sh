@@ -9,6 +9,7 @@ sudo apt-get -qy install \
     curl \
     gnupg-agent \
     mysql-server \
+    python3-pip \
     software-properties-common \
     unzip \
     vim > /dev/null
@@ -23,18 +24,22 @@ echo "### Updating source list..."
 sudo apt-get -yq update > /dev/null
 echo "### Installing Docker..."
 sudo apt-get -yq install docker-ce docker-ce-cli containerd.io > /dev/null
-echo "### Installing Kubernetes..."
-sudo snap install microk8s --classic > /dev/null
+if [[ -z $(sudo snap list | grep microk8s) ]]; then
+    echo "### Installing Kubernetes..."
+    sudo snap install microk8s --classic > /dev/null
+fi
+echo "### Installing AWS..."
+pip3 install -q awscli --upgrade
 echo "### Installing Go..."
 sudo wget -q https://dl.google.com/go/go1.13.linux-amd64.tar.gz
 sudo tar -xvf go1.13.linux-amd64.tar.gz > /dev/null
-echo "### Installing Terraform..."
-sudo wget -q https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip
-sudo unzip terraform_0.12.13_linux_amd64.zip -d /usr/bin > /dev/null
 if [ -d "/usr/local/go" ]; then
 	rm -rf /usr/local/go
 fi
 sudo mv go /usr/local
+echo "### Installing Terraform..."
+sudo wget -q https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip
+sudo unzip terraform_0.12.13_linux_amd64.zip -d /usr/bin > /dev/null
 echo "### Setting up configuration"
 rm -rf $HOME/.bashrc $HOME/.vimrc $HOME/.vim
 ln -s /vm/env/.vimrc $HOME/.vimrc
