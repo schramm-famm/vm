@@ -15,6 +15,10 @@ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/
     sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list > /dev/null
 echo "### Running Node.js setup..."
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - > /dev/null
+echo "### Adding MariaDB repository..."
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 \
+    0xF1656F24C74CD1D8 > /dev/null
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.lstn.net/mariadb/repo/10.4/ubuntu bionic main' > /dev/null
 echo "### Updating source list..."
 sudo apt-get -qy update > /dev/null
 echo "### Installing dependencies..."
@@ -27,8 +31,8 @@ sudo apt-get -qy install \
     docker-ce \
     docker-ce-cli \
     gnupg-agent \
+    mariadb-server \
     mongodb-org \
-    mysql-server \
     nodejs \
     python3-pip \
     software-properties-common \
