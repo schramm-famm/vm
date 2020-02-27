@@ -13,6 +13,8 @@ wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | \
 echo "### Creating MongoDB list file..."
 echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | \
     sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list > /dev/null
+echo "### Running Node.js setup..."
+curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - > /dev/null
 echo "### Updating source list..."
 sudo apt-get -qy update > /dev/null
 echo "### Installing dependencies..."
@@ -27,6 +29,7 @@ sudo apt-get -qy install \
     gnupg-agent \
     mongodb-org \
     mysql-server \
+    nodejs \
     python3-pip \
     software-properties-common \
     unzip \
