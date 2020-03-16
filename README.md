@@ -49,3 +49,9 @@ again.
 ## Updating VM
 To safely apply changes that have been made to the VM provisioning process, run
 `vagrant halt` and then `vagrant up --provision`.
+
+## Kafka Scripts
+Useful scripts for testing Kafka like `kafka-console-producer.sh` and
+`kafka-console-consumer.sh` are located in the
+`/home/vagrant/kafka_2.12-2.4.1/bin/` directory and should be run from the the
+`/home/vagrant/kafka_2.12-2.4.1/` directory.

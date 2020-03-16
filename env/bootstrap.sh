@@ -28,6 +28,7 @@ sudo apt-get -qy install \
     ca-certificates \
     containerd.io \
     curl \
+    default-jre \
     docker-ce \
     docker-ce-cli \
     gnupg-agent \
@@ -42,8 +43,10 @@ if [[ -z $(sudo snap list | grep microk8s) ]]; then
     echo "### Installing Kubernetes..."
     sudo snap install microk8s --classic > /dev/null
 fi
+
 echo "### Installing AWS..."
 pip3 install -q awscli --upgrade
+
 echo "### Installing Go..."
 sudo wget -q https://dl.google.com/go/go1.13.linux-amd64.tar.gz
 sudo tar -xvf go1.13.linux-amd64.tar.gz > /dev/null
@@ -51,11 +54,28 @@ if [ -d "/usr/local/go" ]; then
 	rm -rf /usr/local/go
 fi
 sudo mv go /usr/local
-echo "### Installing Terraform..."
+
 if [ ! -f "/usr/bin/terraform" ]; then
+    echo "### Installing Terraform..."
     sudo wget -q https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip
     sudo unzip terraform_0.12.13_linux_amd64.zip -d /usr/bin > /dev/null
 fi
+
+if [ ! -e "/home/vagrant/kafka_2.12-2.4.1" ]; then
+    echo "### Downloading Kafka scripts..."
+    wget -q https://apache.mirror.globo.tech/kafka/2.4.1/kafka_2.12-2.4.1.tgz
+    tar -xzf kafka_2.12-2.4.1.tgz
+fi
+if [[ -z $(docker images |  grep spotify/kafka) ]]; then
+    echo "### Pulling Kafka docker image..."
+    docker pull spotify/kafka > /dev/null
+fi
+if [[ -z $(docker container ls | grep KAFKA) ]]; then
+    echo "### Starting Kafka docker container..."
+    docker run -d -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=localhost \
+        --env ADVERTISED_PORT=9092 --name=KAFKA spotify/kafka > /dev/null
+fi
+
 if [[ -z $(docker images |  grep mongo) ]]; then
     echo "### Pulling mongo docker image..."
     docker pull mongo > /dev/null
@@ -65,6 +85,7 @@ if [[ -z $(docker container ls | grep MONGODB) ]]; then
     docker run -d --hostname MONGODB --name=MONGODB --net=bridge --expose=27017\
         mongo:latest > /dev/null
 fi
+
 echo "### Setting up configuration..."
 rm -rf $HOME/.bashrc $HOME/.vimrc $HOME/.vim
 ln -s /vm/env/.vimrc $HOME/.vimrc
