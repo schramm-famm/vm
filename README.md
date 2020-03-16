@@ -54,4 +54,5 @@ To safely apply changes that have been made to the VM provisioning process, run
 Useful scripts for testing Kafka like `kafka-console-producer.sh` and
 `kafka-console-consumer.sh` are located in the
 `/home/vagrant/kafka_2.12-2.4.1/bin/` directory and should be run from the the
-`/home/vagrant/kafka_2.12-2.4.1/` directory.
+`/home/vagrant/kafka_2.12-2.4.1/` directory. Examples of how to use them can be
+found [here](https://kafka.apache.org/quickstart).
