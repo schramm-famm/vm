@@ -61,22 +61,32 @@ if [ ! -f "/usr/bin/terraform" ]; then
     sudo unzip terraform_0.12.13_linux_amd64.zip -d /usr/bin > /dev/null
 fi
 
+if [[ -z $(docker images | grep timescale/timescaledb) ]]; then
+    echo "### Pulling TimescaleDB docker image..."
+    docker pull timescale/timescaledb:latest-pg11 > /dev/null
+fi
+if [[ -z $(docker container ls | grep TIMESCALEDB) ]]; then
+    echo "### Starting TimescaleDB docker container..."
+    docker run -d --name timescaledb -p 5432:5432 -e POSTGRES_PASSWORD=password\
+        --name=TIMESCALEDB timescale/timescaledb:latest-pg11 > /dev/null
+fi
+
 if [ ! -e "/home/vagrant/kafka_2.12-2.4.1" ]; then
     echo "### Downloading Kafka scripts..."
     wget -q https://apache.mirror.globo.tech/kafka/2.4.1/kafka_2.12-2.4.1.tgz
     tar -xzf kafka_2.12-2.4.1.tgz
 fi
-if [[ -z $(docker images |  grep spotify/kafka) ]]; then
+if [[ -z $(docker images | grep spotify/kafka) ]]; then
     echo "### Pulling Kafka docker image..."
     docker pull spotify/kafka > /dev/null
 fi
 if [[ -z $(docker container ls | grep KAFKA) ]]; then
     echo "### Starting Kafka docker container..."
-    docker run -d -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=localhost \
+    docker run -d -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=localhost\
         --env ADVERTISED_PORT=9092 --name=KAFKA spotify/kafka > /dev/null
 fi
 
-if [[ -z $(docker images |  grep mongo) ]]; then
+if [[ -z $(docker images | grep mongo) ]]; then
     echo "### Pulling mongo docker image..."
     docker pull mongo > /dev/null
 fi
